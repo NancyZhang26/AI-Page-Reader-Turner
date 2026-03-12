@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap");
+
+:root {
+    --bg: #f5efe6;
+    --surface: #fffaf3;
+    --ink: #1f1b14;
+    --accent: #0b6d52;
+    --accent-2: #d95d39;
+    --line: #d7ccbf;
+    --error: #b3261e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 12% 8%, #ffe2a8 0%, transparent 30%),
+        radial-gradient(circle at 88% 12%, #ffc4a0 0%, transparent 24%),
+        linear-gradient(140deg, #f9f2e7 0%, #f6ebdd 45%, #efe3d2 100%);
+}
+
+.shell {
+    width: min(960px, 92vw);
+    margin: 2.2rem auto 3rem;
+}
+
+.hero {
+    margin-bottom: 1.2rem;
+}
+
+.kicker {
+    margin: 0;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    color: var(--accent);
+}
+
+h1 {
+    margin: 0.25rem 0;
+    font-size: clamp(1.9rem, 3.8vw, 3rem);
+    line-height: 1.05;
+}
+
+.lead {
+    margin: 0;
+    max-width: 70ch;
+    opacity: 0.9;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--surface), white 18%);
+    padding: 1rem;
+    box-shadow: 0 8px 28px rgba(30, 20, 8, 0.08);
+}
+
+.card h2,
+.card h3 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 0.7rem;
+    margin-bottom: 0.28rem;
+    font-size: 0.9rem;
+}
+
+.inline-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.8rem;
+}
+
+.inline-toggle input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+input,
+textarea,
+button {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    padding: 0.64rem 0.72rem;
+    font: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    margin-top: 0.9rem;
+    border: 0;
+    background: linear-gradient(120deg, var(--accent), #158367);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 140ms ease, filter 140ms ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    filter: saturate(1.08);
+}
+
+.result pre {
+    overflow-x: auto;
+    background: #f2eadf;
+    border-radius: 10px;
+    padding: 0.8rem;
+    border: 1px solid var(--line);
+}
+
+.debug-text {
+    margin-bottom: 0.8rem;
+    background: #f2eadf;
+    border: 1px solid var(--line);
+    min-height: 10rem;
+}
+
+.error {
+    color: var(--error);
+    border-color: color-mix(in srgb, var(--error), white 65%);
+    background: #fff0ee;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 720px) {
+    .shell {
+        margin-top: 1.2rem;
+    }
+}

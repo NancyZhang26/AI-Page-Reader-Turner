@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Narra-Tron Console</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+    <main class="shell">
+        <header class="hero">
+            <p class="kicker">Narra-Tron</p>
+            <h1>Software Control Console</h1>
+            <p class="lead">Run OCR + TTS and command parsing without any connected hardware.</p>
+        </header>
+
+        {% if error %}
+        <section class="card error">{{ error }}</section>
+        {% endif %}
+
+        <section class="grid">
+            <form class="card" action="/ui/process-page" method="post" enctype="multipart/form-data">
+                <h2>Process Page</h2>
+                <label for="page_image">Book page image</label>
+                <input id="page_image" name="page_image" type="file" accept="image/*" required />
+
+                <label for="output_audio_path">Output audio path</label>
+                <input id="output_audio_path" name="output_audio_path" type="text" value="output/output.wav" />
+
+                <label class="inline-toggle" for="use_real_ocr">
+                    <input id="use_real_ocr" name="use_real_ocr" type="checkbox" checked />
+                    Use real OCR on uploaded image (PaddleOCR)
+                </label>
+
+                <button type="submit">Run OCR + TTS</button>
+            </form>
+
+            <form class="card" action="/ui/parse-transcript" method="post">
+                <h2>Parse Voice Command</h2>
+                <label for="transcript">Transcript</label>
+                <textarea id="transcript" name="transcript" rows="6"
+                    placeholder="e.g. please go back one page"></textarea>
+                <button type="submit">Parse Command</button>
+            </form>
+        </section>
+
+        {% if process_result %}
+        <section class="card result">
+            <h3>Page Processing Result</h3>
+            <label for="extracted_text_debug">Extracted Text (Debug)</label>
+            <textarea id="extracted_text_debug" class="debug-text" rows="7"
+                readonly>{{ process_result.extracted_text }}</textarea>
+            <pre>{{ process_result | tojson(indent=2) }}</pre>
+        </section>
+        {% endif %}
+
+        {% if parse_result %}
+        <section class="card result">
+            <h3>Transcript Parse Result</h3>
+            <pre>{{ parse_result | tojson(indent=2) }}</pre>
+        </section>
+        {% endif %}
+    </main>
+</body>
+
+</html>
